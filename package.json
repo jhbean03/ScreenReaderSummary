@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "chrome-types": "^0.1.343"
+    "chrome-types": "^0.1.343",
+    "ts-node": "^10.9.2"
   }
 }
