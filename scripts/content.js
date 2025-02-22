@@ -1,9 +1,8 @@
-// Obtain HTML document from current webpage
-const html = document.getElementsByTagName("html");
+// Extract the entire HTML from the given webpage
+const pageHTML = document.documentElement.outerHTML
 
-// Check to see if HTML was read in correctly
-if (article) {
-
-} else {
-    console.log("Error Printing Out Information")
-}
+// Send the HTML to the background script
+chrome.runtime.sendMessage({
+    action: "sendHTML",
+    html: pageHTML
+});
