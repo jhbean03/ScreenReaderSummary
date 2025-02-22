@@ -15,7 +15,10 @@
     },
     "content_scripts": [
         {
-            "ts": ["scripts/content.ts"]
+            "js": ["scripts/content.js"],
+            "matches": [
+                "https://*"
+            ]
         }
     ]
 }
