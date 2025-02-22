@@ -1,8 +1,8 @@
 from flask import Flask, request, jsonify
+from generate_summary import generate_summary
 
 # Initialize a Flask server 
 app = Flask(__name__)
-
 
 @app.route('/summarize', methods=['POST'])
 def summarize():
@@ -12,8 +12,8 @@ def summarize():
     # Extract the HTML data from request
     page_html = data.get("html", "")
 
-    # TODO: Place call to summary function here
-    summary = "Hello, World!"
+    # Generate summary for the webpage
+    summary = generate_summary()
 
     # Return summary in JSON format
     return jsonify({"summary": summary})
