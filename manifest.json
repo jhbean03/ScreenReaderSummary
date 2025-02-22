@@ -1,0 +1,10 @@
+{
+    "name" : "Screen Reader Summary",
+    "description" : "Extension for summarizing a webpage, particularly for screen readers",
+    "version": "1.0",
+    "manifest_version": 3,
+    "action": {
+        "default_popup": "test.html",
+        "default_icon": "assets/icon.png"
+    }
+}
