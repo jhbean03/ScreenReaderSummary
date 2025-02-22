@@ -4,7 +4,7 @@
     "version": "1.0",
     "manifest_version": 3,
     "action": {
-        "default_popup": "test.html",
+        "default_popup": "extension_display/summary.html",
         "default_icon": "assets/images/icon-128.png"
     },
     "icons": {
@@ -17,7 +17,8 @@
         {
             "js": ["scripts/content.js"],
             "matches": [
-                "https://*"
+                "https://developer.chrome.com/docs/extensions/*",
+                "https://developer.chrome.com/docs/webstore/*"
             ]
         }
     ]
