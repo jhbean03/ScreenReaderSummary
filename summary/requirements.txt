@@ -2,4 +2,3 @@ bs4
 pandas
 numpy
 flask
-transfr

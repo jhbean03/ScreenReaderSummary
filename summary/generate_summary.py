@@ -2,27 +2,33 @@ import urllib.request
 from bs4 import BeautifulSoup
 import pandas as pd
 import numpy as np
+import re
 
 def generate_summary(html):
 
-    # Create 
-    soup = BeautifulSoup(html, features = "html.parser")
+    # Obtain text information from the HTML
+    soup = BeautifulSoup(html, "html.parser")
+
+    # Remove all of the scripts and styling information
     for script in soup(["script", "style"]):
         script.extract()
     text = soup.get_text()
-    lines = (line.strip() for line in text.splitlines())
-    chunks = (phrase.strip() for line in lines for phrase in line.split(" "))
-    text = '\n'.join(chunk for chunk in chunks if chunk)
-    print(text)
-    file = open("trainingstuff.txt", 'r')
-    with file as file:
-        file_content = file.read()
-    print(file_content)
-    # tokenizer = T5Tokenizer.from_pretrained("google-tf/tf-small")
-    # model = T5ForConditionalGeneration.from_pretrained("google-t5/t5-small")
-    # input = tokenizer("Summarize this text:" + text, return_tensors="pt").input
-    # answer = tokenizer(file_content, return_tensors="pt").input
-    # loss = model(input=input, answer=answer).loss
-    # loss.item()
 
+    # Clean up the text obtained from the file
+    clean_text = preprocess_text(text)
 
+    print(clean_text)
+
+def preprocess_text(text):
+    # Remove extra spaces
+    text = re.sub(r'\s+', ' ', text)
+
+    # Remove special characters
+    text = re.sub(r'[^\w\s]', '', text)
+
+    # Remove leading and trailing whitespace
+    return text.strip()
+
+with open("../popup/popup.html", "r") as file:
+    html_content = file.read()
+    generate_summary(html_content)
