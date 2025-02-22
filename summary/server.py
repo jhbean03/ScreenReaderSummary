@@ -13,12 +13,11 @@ def summarize():
     page_html = data.get("html", "")
 
     # TODO: Place call to summary function here
-    summary = "Summary goes here!"
+    summary = "Hello, World!"
 
     # Return summary in JSON format
     return jsonify({"summary": summary})
 
-# Set up debug mode option
 if __name__ == '__main__':
     app.run(debug=True)
 
