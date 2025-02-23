@@ -1,15 +1,14 @@
 import urllib.request
-from transformers import T5Tokenizer, T5ForConditionalGeneration
+from transformers import GPT2LMHeadModel
 from pathlib import Path
 from bs4 import BeautifulSoup
 import pandas as pd
 import numpy as np
-url = "https://patorjk.com/games/snake/"
+url = "https://www.physicsclassroom.com/"
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'}
 
 # Create a request with headers
 req = urllib.request.Request(url, headers=headers)
-
 # Open the URL
 html = urllib.request.urlopen(req).read()
 soup = BeautifulSoup(html, features = "html.parser")
