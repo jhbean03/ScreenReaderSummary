@@ -1,5 +1,4 @@
 bs4
-pandas
-numpy
 flask
-transformers
+openai
+python-dotenv

@@ -1,6 +1,8 @@
 /* Set up a listener that checks for HTML from the webpage user is 
 viewing */
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    console.log("Message received in background.js:", message);
+    
     // Once the HTML is obtained, send to Python script
     if (message.action === "sendHTML") {
         // Send the html to the Python script

@@ -1,9 +1,6 @@
-from transformers import pipeline
-import torch
-import urllib.request
 from bs4 import BeautifulSoup
-import pandas as pd
-import numpy as np
+from dotenv import load_dotenv
+from openai import OpenAI
 import re
 import os
 
@@ -20,7 +17,7 @@ def generate_summary(html):
     # Clean up the text obtained from the file
     clean_text = preprocess_text(text)
 
-    print(clean_text)
+    # Return AI-generated summary
     return summarize_text(clean_text)
 
 def preprocess_text(text):
@@ -31,9 +28,30 @@ def preprocess_text(text):
     text = re.sub(r'[^\w\s]', '', text)
 
     # Remove leading and trailing whitespace
-    return text.strip()
+    return text.replace("*", '').strip()
 
 def summarize_text(clean_text):
-    summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
-    summary = summarizer(clean_text, maxlength=50, min_length=30, do_sample=False)
-    return summary[0]['summary_text']
+    # Load in user's OpenRouter API key
+    load_dotenv()
+    API_KEY = os.getenv('OPENROUTER_API_KEY')
+    client = OpenAI(
+        base_url="https://openrouter.ai/api/v1",
+        api_key=API_KEY
+    )
+
+    try:
+        # Generate response from GPT-3.5 Turbo model
+        response = client.chat.completions.create(
+            model="deepseek/deepseek-r1:free",
+            messages=[
+                {"role": "system", "content": "You are an AI that summarizes webpage content concisely."},
+                {"role": "user", "content": f"Summarize this text from a webpage: {clean_text}"} 
+            ]
+        )
+
+        # Return AI-generated summary
+        return response.choices[0].message.content
+    
+    except Exception as e:
+        # If there was an error accessing the AI, return error message
+        return f"Oh no! Call to AI failed! Error: {str(e)}"
