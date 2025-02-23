@@ -1,4 +1,4 @@
-from transformers import GPT2LMHeadModel, GPT2Tokenizer
+from transformers import pipeline
 import torch
 import urllib.request
 from bs4 import BeautifulSoup
@@ -21,7 +21,7 @@ def generate_summary(html):
     clean_text = preprocess_text(text)
 
     print(clean_text)
-    summarize_text(clean_text)
+    return summarize_text(clean_text)
 
 def preprocess_text(text):
     # Remove extra spaces
@@ -34,33 +34,6 @@ def preprocess_text(text):
     return text.strip()
 
 def summarize_text(clean_text):
-    model_name = 'gpt2'
-    model = GPT2LMHeadModel.from_pretrained(model_name)
-    tokenizer = GPT2Tokenizer.from_pretrained(model_name)
-    tokens = tokenizer(clean_text, return_tensors='pt')
-    # for i in range(len(clean_text.split())): 
-    #     tokens[str(id(clean_text.split()[i]))] = clean_text.split()[i]
-    #print("good here1")
-    #token_ids = [model.config.pad_token_id for word in tokens] 
-    #input_tensor = torch.tensor([tokens])
-    #print("good here2")
-    #print("good here3")
-    print(tokens)
-    #print("good here4")
-    output = model.generate(**tokens, max_length= 50, temperature=0.7)
-    summary = tokenizer.decode(output[0], skip_special_tokens=True)
-    print("Summary:", summary )
-
-
-
-# if os.path.exists(file_path):
-#     with open(file_path, "r") as file:
-#         content = file.read()
-#         print(content)
-# else:
-#     print(f"Error: The file {file_path} does not exist.")
-
-file_path = "summary/popup.html"
-with open(file_path, "r") as file:
-    html_content = file.read()
-    generate_summary(html_content)
+    summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
+    summary = summarizer(clean_text, maxlength=50, min_length=30, do_sample=False)
+    return summary[0]['summary_text']
