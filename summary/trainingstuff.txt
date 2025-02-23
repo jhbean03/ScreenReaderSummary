@@ -1,3 +1,0 @@
-Java Script Snake. Choice of multiple different themes: Light, Main, Dark, Green, Matrix, and more.
-Choice of Difficulty Mode: Easy, Medium, Hard, Impossible, Rush. 
-Then you can also click a button if you want it to be in full screen. 
