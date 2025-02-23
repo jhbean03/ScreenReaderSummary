@@ -17,7 +17,7 @@ def generate_summary(html):
     # Clean up the text obtained from the file
     clean_text = preprocess_text(text)
 
-    print(clean_text)
+    return(clean_text)
 
 def preprocess_text(text):
     # Remove extra spaces
@@ -28,7 +28,3 @@ def preprocess_text(text):
 
     # Remove leading and trailing whitespace
     return text.strip()
-
-with open("../popup/popup.html", "r") as file:
-    html_content = file.read()
-    generate_summary(html_content)

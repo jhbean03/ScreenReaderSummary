@@ -13,7 +13,7 @@ def summarize():
     page_html = data.get("html", "")
 
     # Generate summary for the webpage
-    summary = generate_summary()
+    summary = generate_summary(page_html)
 
     # Return summary in JSON format
     return jsonify({"summary": summary})
