@@ -18,7 +18,7 @@ def generate_summary(html):
     clean_text = preprocess_text(text)
 
     # Return AI-generated summary
-    return summarize_text(clean_text)
+    return summarize_text(clean_text).replace("*", '')
 
 def preprocess_text(text):
     # Remove extra spaces
@@ -28,7 +28,7 @@ def preprocess_text(text):
     text = re.sub(r'[^\w\s]', '', text)
 
     # Remove leading and trailing whitespace
-    return text.replace("*", '').strip()
+    return text.strip()
 
 def summarize_text(clean_text):
     # Load in user's OpenRouter API key
