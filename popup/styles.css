@@ -1,0 +1,22 @@
+@import url("https://assets.bux.osu.edu/bux-webfonts2/bux-webfonts2.css");
+
+.head-container {
+    background-color: rgb(126, 0, 0);
+    color: white;
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    gap: 20px;
+    font-family: 'BuckeyeSans'
+}
+
+body {
+    background-color: white;
+    margin: 0;
+    font-family: 'BuckeyeSans'
+}
+
+p {
+    margin: 20px;
+}
